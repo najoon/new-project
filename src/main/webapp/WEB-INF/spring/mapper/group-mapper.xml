@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.heavenstar.zandi.persistance.GroupDao">
+ 
+ 	<select id="selectAll" resultType="GroupVO">
+ 		SELECT * FROM tbl_group
+ 	</select>
+ 	<select id="findByGroup" resultType="GroupVO">
+ 		SELECT * FROM tbl_group WHERE g_seq = #{g_seq}
+ 	</select>
+ 	<select id="findByGroupPeople" resultType="GroupVO">
+ 		SELECT * FROM tbl_join_group
+					WHERE j_gname = #{j_gname}
+ 	</select>
+ 	<select id="findByOnePeople" resultType="GroupVO">
+ 		SELECT * FROM tbl_join_group
+					WHERE j_gname = #{j_gname} AND j_username = #{j_username}
+ 	</select>
+
+ 	<insert id="insert" parameterType="GroupVO">
+		INSERT INTO tbl_group(
+			g_seq,
+			g_name,
+			g_people,
+			g_create_date,
+			g_end_date
+		)VALUES(
+			#{g_seq},
+			#{g_name},
+			#{g_people},
+			#{g_create_date},
+			#{g_end_date}
+		)
+ 	</insert>
+ 	
+ 	<insert id="insertPeople" parameterType="GroupVO">
+ 		INSERT INTO tbl_join_group(
+ 			j_seq,
+			j_gname,
+			j_username,
+			j_count
+ 		)VALUES(
+ 			#{j_seq},
+			#{j_gname},
+			#{j_username},
+			#{j_count}
+ 		)
+ 	</insert>
+ 	
+ 	<update id="updateGroupIn" parameterType="GroupVO">
+ 		UPDATE tbl_group
+ 		SET g_inpeople = #{g_inpeople} 
+ 		WHERE g_seq = #{g_seq}
+ 	</update>
+ 	<update id="updateUser" parameterType="GroupVO">
+		UPDATE tbl_join_group
+		SET j_gname = #{j_gname}, 
+			j_username = #{j_username},
+			j_percent = #{j_percent},
+			j_count = #{j_count}
+		WHERE j_seq = #{j_seq} 
+ 	</update>
+ 	<delete id="delete" parameterType="GroupVO">
+		DELETE FROM tbl_group WHERE g_seq = #{g_seq}
+ 	</delete>
+ 	
+ 	<delete id="deletePeople" parameterType="GroupVO">
+		DELETE FROM tbl_join_group WHERE j_seq = #{j_seq}
+ 	</delete>
+ 	
+ 	<select id="create_group_table">
+		CREATE TABLE IF NOT EXISTS tbl_group(
+			g_seq BIGINT AUTO_INCREMENT PRIMARY KEY,
+			g_name VARCHAR(20) NOT NULL UNIQUE,
+			g_people INT NOT NULL,
+			g_inpeople INT,
+			g_create_date VARCHAR(20),
+			g_end_date VARCHAR(20)
+		)
+ 	</select>
+ 	
+ 	<select id="create_join_group_table">
+		CREATE TABLE IF NOT EXISTS tbl_join_group(
+			j_seq BIGINT AUTO_INCREMENT PRIMARY KEY,
+			j_gname VARCHAR(20),
+			j_username VARCHAR(20),
+			j_percent VARCHAR(5),
+			j_count INT
+		)
+ 	</select>
+ 	
+ 	
+
+ </mapper> 

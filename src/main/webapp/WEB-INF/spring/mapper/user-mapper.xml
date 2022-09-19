@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.heavenstar.zandi.persistance.UserDao">
+ 
+ 	<select id="selectAll" resultType="UserVO">
+ 		SELECT * FROM tbl_users
+ 	</select>
+ 	<select id="findById" resultType="UserVO">
+ 		SELECT * FROM tbl_users WHERE u_seq = #{u_seq}
+ 	</select>
+ 	
+ 	<select id="findByName" resultType="UserVO">
+		SELECT * FROM tbl_users WHERE u_username = #{u_username}
+ 	</select>
+ 	
+ 	<insert id="insert" parameterType="UserVO">
+		INSERT INTO tbl_users(
+			u_username,
+			u_password,
+			u_github_id,
+			u_email
+		) VALUES(
+			#{u_username},
+			#{u_password},
+			#{u_github_id},
+			#{u_email}
+		)
+ 	</insert>
+ 	
+ 	<update id="update" parameterType="UserVO">
+ 		UPDATE tbl_users
+ 		SET u_username = #{u_username}
+ 			u_password = #{u_password},
+ 			u_github_id = #{u_github_id},
+ 			u_email = #{u_email}
+ 		WHERE  u_seq = #{u_seq}
+ 	</update>
+ 	<delete id="delete">
+
+ 	</delete>
+ 	
+ 	<select id="create_user_table">
+		CREATE TABLE IF NOT EXISTS tbl_users(
+			u_seq BIGINT PRIMARY KEY AUTO_INCREMENT,
+			u_username VARCHAR(20) NOT NULL UNIQUE,
+			u_password VARCHAR(30) NOT NULL,
+			u_github_id VARCHAR(20) NOT NULL UNIQUE,
+			u_email VARCHAR(30) NOT NULL
+		)
+ 	</select>
+
+
+ </mapper> 
