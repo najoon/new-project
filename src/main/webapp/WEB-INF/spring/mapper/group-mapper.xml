@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
- <mapper namespace="com.heavenstar.zandi.persistance.GroupDao">
+ <mapper namespace="com.najoon.study.persistance.GroupDao">
  
  	<select id="selectAll" resultType="GroupVO">
  		SELECT * FROM tbl_group

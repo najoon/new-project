@@ -9,14 +9,14 @@
 		
 		<bean id="ds" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
-		<property name="url" value="jdbc:mysql://localhost:3306/zandidb"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/studydb"/>
 		<property name="username" value="root"/>
 		<property name="password" value="!Korea8080"/>
 	</bean>
 	
 	<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="ds"/>
-		<property name="typeAliasesPackage" value="com.heavenstar.zandi.model"/>
+		<property name="typeAliasesPackage" value="com.najoon.study.model"/>
 		<property name="mapperLocations" value="/WEB-INF/spring/mapper/*-mapper.xml"/>
 		<property name="configuration">
 			<bean class="org.apache.ibatis.session.Configuration">
@@ -30,7 +30,7 @@
 		<constructor-arg ref="sessionFactory"/>
 	</bean>
 	
-	<mybatis-spring:scan base-package="com.heavenstar.zandi.persistance"/>
+	<mybatis-spring:scan base-package="com.najoon.study.persistance"/>
 
 
 </beans>

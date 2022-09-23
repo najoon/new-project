@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
- <mapper namespace="com.heavenstar.zandi.persistance.UserDao">
+ <mapper namespace="com.najoon.study.persistance.UserDao">
  
  	<select id="selectAll" resultType="UserVO">
  		SELECT * FROM tbl_users
